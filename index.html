@@ -13,11 +13,8 @@
   <script>
 
     function diff_minutes(dt2, dt1) {
-
-      var diff = (dt2.getTime() - dt1.getTime()) / 1000;
-      diff /= 60;
+      var diff = (dt2.getTime() - dt1.getTime()) / 1000 / 60;
       return Math.abs(Math.round(diff));
-
     }
 
     document.getElementById('upload').addEventListener('change', readFileAsString)
@@ -35,6 +32,7 @@
         var comp = new ICAL.Component(jcalData);
         var vevents = comp.getAllSubcomponents("vevent");
 
+        let cumulativeDuration = {};
 
         vevents.forEach(vevent => {
           var event = new ICAL.Event(vevent);
@@ -43,15 +41,50 @@
           var endDate = event.endDate.toJSDate();
           var duration = diff_minutes(endDate, startDate);
 
+
+          // Doesn't account for repeating events
+          // if (cumulativeDuration.hasOwnProperty(summary)) {
+          //   cumulativeDuration[summary] += duration;
+          // } else {
+          //   cumulativeDuration[summary] = duration;
+          // }
+
           console.log(summary);
           console.log(startDate);
           console.log(endDate);
           console.log(duration);
           console.log('');
+
+
+          var expand = new ICAL.RecurExpansion({
+            component: vevent,
+            dtstart: vevent.getFirstPropertyValue('dtstart')
+          });
+
+          let i = 0;
+          let max = 500;
+          let dates = [];
+          let now = new Date();
+          while (next = expand.next()) {
+            if (next.toJSDate() > now) { 
+              break;
+            }
+            if (i++ > max) {
+              console.error("too many dates");
+              break;
+            }
+            console.log(next.toJSDate());
+          }
+
+
+
           console.log('---------------------------');
           console.log('');
 
         });
+
+
+        console.log(cumulativeDuration);
 
       };
       reader.readAsText(files[0]);
