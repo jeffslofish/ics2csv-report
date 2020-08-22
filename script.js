@@ -64,9 +64,6 @@ function readFileAsString() {
         while ((next = expand.next())) {
           eventStartDate = next.toJSDate();
 
-        //   if (eventStartDate > now) {
-        //     break;
-        //   }
           if (i++ > max) {
             console.error('too many dates');
             break;
@@ -88,8 +85,6 @@ function readFileAsString() {
           } else {
             cumulativeDuration[summary] = duration;
           }
-
-          //console.log(summary, 'duration', cumulativeDuration[summary]);
         }
       } else {
         if (eventStartDate < chosenStartDate) {
@@ -117,7 +112,7 @@ function readFileAsString() {
       console.log('');
     });
 
-    console.log(cumulativeDuration);
+    console.log('Summary: ', cumulativeDuration);
   };
   reader.readAsText(files[0]);
 }
