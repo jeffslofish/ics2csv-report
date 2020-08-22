@@ -37,10 +37,10 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
             break;
           }
 
-          console.log(event);
-          console.log(summary);
-          console.log('Duration: ', duration);
-          console.log(next.toJSDate());
+        //   console.log(event);
+        //   console.log(summary);
+        //   console.log('Duration: ', duration);
+        //   console.log(next.toJSDate());
 
           if (cumulativeDuration.hasOwnProperty(summary)) {
             cumulativeDuration[summary] += duration;
@@ -56,10 +56,10 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
           return;
         }
 
-        console.log(event);
-        console.log(summary);
-        console.log('Duration: ', duration);
-        console.log(eventStartDate);
+        // console.log(event);
+        // console.log(summary);
+        // console.log('Duration: ', duration);
+        // console.log(eventStartDate);
 
         if (cumulativeDuration.hasOwnProperty(summary)) {
           cumulativeDuration[summary] += duration;
@@ -67,12 +67,16 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
           cumulativeDuration[summary] = duration;
         }
 
-        console.log('');
+        // console.log('');
       }
 
-      console.log('---------------------------');
-      console.log('');
+    //   console.log('---------------------------');
+    //   console.log('');
     });
 
     console.log('Summary: ', cumulativeDuration);
+}
+
+if (typeof exports !== 'undefined') {
+    exports.generateCumulativeTimeSummary = generateCumulativeTimeSummary;
 }
