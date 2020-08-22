@@ -39,50 +39,59 @@
           var summary = event.summary;
           var startDate = event.startDate.toJSDate();
           var endDate = event.endDate.toJSDate();
-          var duration = diff_minutes(endDate, startDate);
+          let duration = event.duration.toSeconds() / 60;
 
-
-          // Doesn't account for repeating events
-          // if (cumulativeDuration.hasOwnProperty(summary)) {
-          //   cumulativeDuration[summary] += duration;
-          // } else {
-          //   cumulativeDuration[summary] = duration;
-          // }
-
+          console.log(event);
           console.log(summary);
-          console.log(startDate);
-          console.log(endDate);
-          console.log(duration);
-          console.log('');
+          console.log("Duration: ", duration)
 
+          if (event.sequence) {
+            var expand = new ICAL.RecurExpansion({
+              component: vevent,
+              dtstart: vevent.getFirstPropertyValue('dtstart')
+            });
 
-          var expand = new ICAL.RecurExpansion({
-            component: vevent,
-            dtstart: vevent.getFirstPropertyValue('dtstart')
-          });
+            let i = 0;
+            let max = 50065;
+            let dates = [];
+            let now = new Date();
+            let next;
+            while (next = expand.next()) {
+              if (next.toJSDate() > now) {
+                break;
+              }
+              if (i++ > max) {
+                console.error("too many dates");
+                break;
+              }
+              console.log(next.toJSDate());
 
-          let i = 0;
-          let max = 500;
-          let dates = [];
-          let now = new Date();
-          while (next = expand.next()) {
-            if (next.toJSDate() > now) { 
-              break;
+              if (cumulativeDuration.hasOwnProperty(summary)) {
+                cumulativeDuration[summary] += duration;
+              } else {
+                cumulativeDuration[summary] = duration;
+              }
+
+              //console.log(summary, 'duration', cumulativeDuration[summary]);
             }
-            if (i++ > max) {
-              console.error("too many dates");
-              break;
+          } else {
+
+            console.log(startDate);
+
+            if (cumulativeDuration.hasOwnProperty(summary)) {
+              cumulativeDuration[summary] += duration;
+            } else {
+              cumulativeDuration[summary] = duration;
             }
-            console.log(next.toJSDate());
+
+            console.log('');
           }
-
-
 
           console.log('---------------------------');
           console.log('');
 
+          
         });
-
 
         console.log(cumulativeDuration);
 
