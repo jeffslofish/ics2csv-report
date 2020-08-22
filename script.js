@@ -32,7 +32,8 @@ function readFileAsString() {
     console.log('Chosen start date: ', chosenStartDate);
     console.log('Chosen end date: ', chosenEndDate);
 
-    generateCumulativeTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
+    let cumulativeDurations = generateCumulativeTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
+    console.log(cumulativeDurations);
   };
   reader.readAsText(files[0]);
 }

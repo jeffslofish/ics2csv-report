@@ -3,7 +3,7 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
     var comp = new ICAL.Component(jcalData);
     var vevents = comp.getAllSubcomponents('vevent');
 
-    let cumulativeDuration = {};
+    let cumulativeDurations = {};
 
     vevents.forEach((vevent) => {
       var event = new ICAL.Event(vevent);
@@ -42,10 +42,10 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
         //   console.log('Duration: ', duration);
         //   console.log(next.toJSDate());
 
-          if (cumulativeDuration.hasOwnProperty(summary)) {
-            cumulativeDuration[summary] += duration;
+          if (cumulativeDurations.hasOwnProperty(summary)) {
+            cumulativeDurations[summary] += duration;
           } else {
-            cumulativeDuration[summary] = duration;
+            cumulativeDurations[summary] = duration;
           }
         }
       } else {
@@ -61,10 +61,10 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
         // console.log('Duration: ', duration);
         // console.log(eventStartDate);
 
-        if (cumulativeDuration.hasOwnProperty(summary)) {
-          cumulativeDuration[summary] += duration;
+        if (cumulativeDurations.hasOwnProperty(summary)) {
+          cumulativeDurations[summary] += duration;
         } else {
-          cumulativeDuration[summary] = duration;
+          cumulativeDurations[summary] = duration;
         }
 
         // console.log('');
@@ -74,7 +74,7 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
     //   console.log('');
     });
 
-    console.log('Summary: ', cumulativeDuration);
+    return cumulativeDurations;
 }
 
 if (typeof exports !== 'undefined') {

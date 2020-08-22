@@ -27,7 +27,9 @@ fs.readFile('test-001.ics', 'utf8', function (err,iCalendarData) {
   // console.log('Filter start date: ', chosenStartDate);
   // console.log('Filter end date: ', chosenEndDate);
   
-  generateCumulativeTimeSummary.generateCumulativeTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
+  let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
+  console.log(cumulativeDurations);
+  
 });
 
 
