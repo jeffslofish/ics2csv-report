@@ -5,4 +5,7 @@ Handles single and recurring events.
 
 Uses index.html for web based interface.
 
-Uses Node for testing.
+Uses Node and mocha for testing. To run tests, run:
+````
+npm test
+````
