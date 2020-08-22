@@ -7,5 +7,7 @@ Uses index.html for web based interface.
 
 Uses Node and mocha for testing. To run tests, run:
 ````
+cd test
+npm install
 npm test
 ````
