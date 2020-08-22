@@ -4,8 +4,8 @@ generateCumulativeTimeSummary = require('../generateCumulativeTimeSummary.js');
 assert = require('assert');
 
 function generateFilterStartDate(date) {
- let chosenStartDateParts = date.split('-');
- return new Date(
+  let chosenStartDateParts = date.split('-');
+  return new Date(
     chosenStartDateParts[0],
     chosenStartDateParts[1] - 1,
     chosenStartDateParts[2]
@@ -24,8 +24,78 @@ function generateFilterEndDate(date) {
   );
 }
 
-describe('recurring event', function () {
-  describe('generateCumulativeTimeSummary()', function () {
+describe('generateCumulativeTimeSummary()', function () {
+  describe('single non-recurring event', function () {
+    it('should return object with correct cumulative time when the filter start and end dates are the same as the event date', function (done) {
+      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+        if (err) {
+          return console.log(err);
+        }
+
+        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+          generateFilterStartDate('2020-08-18'),
+          generateFilterEndDate('2020-08-18'),
+          iCalendarData
+        );
+
+        assert.deepEqual(cumulativeDurations, { test0: 300 });
+        done();
+      });
+    });
+
+    it('should return object with correct cumulative time when the filter is before the event', function (done) {
+      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+        if (err) {
+          return console.log(err);
+        }
+
+        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+          generateFilterStartDate('2020-08-15'),
+          generateFilterEndDate('2020-08-17'),
+          iCalendarData
+        );
+
+        assert.deepEqual(cumulativeDurations, {});
+        done();
+      });
+    });
+
+    it('should return object with correct cumulative time when the filter after before the event', function (done) {
+      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+        if (err) {
+          return console.log(err);
+        }
+
+        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+          generateFilterStartDate('2020-08-19'),
+          generateFilterEndDate('2020-08-25'),
+          iCalendarData
+        );
+
+        assert.deepEqual(cumulativeDurations, {});
+        done();
+      });
+    });
+
+    it('should return object with correct cumulative time when the filter is around the event', function (done) {
+      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+        if (err) {
+          return console.log(err);
+        }
+
+        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+          generateFilterStartDate('2020-08-10'),
+          generateFilterEndDate('2020-08-25'),
+          iCalendarData
+        );
+
+        assert.deepEqual(cumulativeDurations, { test0: 300 });
+        done();
+      });
+    });
+  });
+
+  describe('single recurring event', function () {
     it('should return object with correct cumulative time when the filter start and end dates are the same as the event start and end dates', function (done) {
       fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
@@ -123,7 +193,7 @@ describe('recurring event', function () {
           iCalendarData
         );
 
-        assert.deepEqual(cumulativeDurations, { });
+        assert.deepEqual(cumulativeDurations, {});
         done();
       });
     });
@@ -140,11 +210,9 @@ describe('recurring event', function () {
           iCalendarData
         );
 
-        assert.deepEqual(cumulativeDurations, {test1: 240 });
+        assert.deepEqual(cumulativeDurations, { test1: 240 });
         done();
       });
     });
-
-
   });
 });
