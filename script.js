@@ -57,7 +57,7 @@ function readFileAsString() {
         });
 
         let i = 0;
-        let max = 50065;
+        let max = 500;
         let dates = [];
         let now = new Date();
         let next;
