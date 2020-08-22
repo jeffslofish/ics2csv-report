@@ -3,43 +3,10 @@ function diff_minutes(dt2, dt1) {
   return Math.abs(Math.round(diff));
 }
 
-document.getElementById('upload').addEventListener('change', readFileAsString);
-function readFileAsString() {
-  var files = this.files;
-  if (files.length === 0) {
-    console.log('No file is selected');
-    return;
-  }
-
-  var reader = new FileReader();
-  reader.onload = function (event) {
-    var iCalendarData = event.target.result;
+function generateCumulateTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
     var jcalData = ICAL.parse(iCalendarData);
     var comp = new ICAL.Component(jcalData);
     var vevents = comp.getAllSubcomponents('vevent');
-
-    var chosenStartDateParts = document
-      .getElementById('startDate')
-      .value.split('-');
-    var chosenStartDate = new Date(
-      chosenStartDateParts[0],
-      chosenStartDateParts[1] - 1,
-      chosenStartDateParts[2]
-    );
-    var chosenEndDateParts = document
-      .getElementById('endDate')
-      .value.split('-');
-    var chosenEndDate = new Date(
-      chosenEndDateParts[0],
-      chosenEndDateParts[1] - 1,
-      chosenEndDateParts[2],
-      23,
-      59,
-      59
-    );
-
-    console.log('Chosen start date: ', chosenStartDate);
-    console.log('Chosen end date: ', chosenEndDate);
 
     let cumulativeDuration = {};
 
@@ -68,10 +35,10 @@ function readFileAsString() {
             console.error('too many dates');
             break;
           }
-          if (eventStartDate < chosenStartDate) {
+          if (eventStartDate < filterStartDate) {
             continue;
           }
-          if (eventStartDate > chosenEndDate) {
+          if (eventStartDate > filterEndDate) {
             break;
           }
 
@@ -87,10 +54,10 @@ function readFileAsString() {
           }
         }
       } else {
-        if (eventStartDate < chosenStartDate) {
+        if (eventStartDate < filterStartDate) {
           return;
         }
-        if (eventStartDate > chosenEndDate) {
+        if (eventStartDate > filterEndDate) {
           return;
         }
 
@@ -113,6 +80,45 @@ function readFileAsString() {
     });
 
     console.log('Summary: ', cumulativeDuration);
+}
+
+
+document.getElementById('upload').addEventListener('change', readFileAsString);
+function readFileAsString() {
+  var files = this.files;
+  if (files.length === 0) {
+    console.log('No file is selected');
+    return;
+  }
+
+  var reader = new FileReader();
+  reader.onload = function (event) {
+    var iCalendarData = event.target.result;
+    
+    var chosenStartDateParts = document
+      .getElementById('startDate')
+      .value.split('-');
+    var chosenStartDate = new Date(
+      chosenStartDateParts[0],
+      chosenStartDateParts[1] - 1,
+      chosenStartDateParts[2]
+    );
+    var chosenEndDateParts = document
+      .getElementById('endDate')
+      .value.split('-');
+    var chosenEndDate = new Date(
+      chosenEndDateParts[0],
+      chosenEndDateParts[1] - 1,
+      chosenEndDateParts[2],
+      23,
+      59,
+      59
+    );
+
+    console.log('Chosen start date: ', chosenStartDate);
+    console.log('Chosen end date: ', chosenEndDate);
+
+    generateCumulateTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
   };
   reader.readAsText(files[0]);
 }
