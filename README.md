@@ -8,7 +8,7 @@ If you have a calendar that looks like this:
 
 ![visual calendar](https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/calendar-visual.png?raw=true)
 
-You can transform it into this:
+You can transform it into a CSV, which looks like this:
 
 ![calendar csv summary](https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/calendar-summary-csv.png?raw=true)
 
