@@ -1,3 +1,6 @@
+let uploadFileInput = document.getElementById('upload')
+uploadFileInput.addEventListener('change', readFileAsString);
+
 function readFileAsString() {
   var files = this.files;
   if (files.length === 0) {
@@ -8,6 +11,7 @@ function readFileAsString() {
   var reader = new FileReader();
   reader.onload = function (event) {
     var iCalendarData = event.target.result;
+    uploadFileInput.value = null; // So you can process the same file more than once if desired
 
     var chosenStartDateParts = document
       .getElementById('startDate')
@@ -44,4 +48,4 @@ function readFileAsString() {
   reader.readAsText(files[0]);
 }
 
-document.getElementById('upload').addEventListener('change', readFileAsString);
+
