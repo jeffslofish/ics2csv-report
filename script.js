@@ -1,3 +1,6 @@
+let uploadFileInput = document.getElementById('upload')
+uploadFileInput.addEventListener('change', readFileAsString);
+
 function readFileAsString() {
   var files = this.files;
   if (files.length === 0) {
@@ -8,7 +11,8 @@ function readFileAsString() {
   var reader = new FileReader();
   reader.onload = function (event) {
     var iCalendarData = event.target.result;
-    
+    uploadFileInput.value = null; // So you can process the same file more than once if desired
+
     var chosenStartDateParts = document
       .getElementById('startDate')
       .value.split('-');
@@ -32,10 +36,16 @@ function readFileAsString() {
     console.log('Chosen start date: ', chosenStartDate);
     console.log('Chosen end date: ', chosenEndDate);
 
-    let cumulativeDurations = generateCumulativeTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
+    let cumulativeDurations = cumulativeTimeSummary(
+      chosenStartDate,
+      chosenEndDate,
+      iCalendarData
+    );
     console.log(cumulativeDurations);
+
+    CSVFromObject(cumulativeDurations);
   };
   reader.readAsText(files[0]);
 }
 
-document.getElementById('upload').addEventListener('change', readFileAsString);
+
