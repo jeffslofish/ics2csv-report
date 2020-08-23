@@ -3,9 +3,29 @@ Parses iCal calendar and generates a CSV file with the total durations from all 
 
 Handles single and recurring events.
 
-Uses index.html for web based interface.
+## Example conversion:
+If you have a calendar that looks like this:
 
-Uses Node and Mocha for testing. To run tests, run:
+![visual calendar](https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/calendar-visual.png?raw=true)
+
+You can transform it into this:
+
+![calendar csv summary](https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/calendar-summary-csv.png?raw=true)
+
+Which if you import into Excel, will look like this:
+
+![calendar excel summary](https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/calendar-summary-excel.png?raw=true)
+
+## How to use:
+1. Download or clone this repo.
+1. Export your calendar into iCal format (may be .ics extension).
+1. Open index.html.
+1. Choose your desired start and end dates to filter events.
+1. Click `Choose File` and select your exported calendar file.
+1. You will then be promted to download the CSV summary file.
+1. Import the CSV file into Excel or Google Sheets if desired
+
+## To run unit tests:
 ````
 cd test
 npm install
