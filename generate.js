@@ -9,7 +9,7 @@ function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
     var event = new ICAL.Event(vevent);
     var summary = event.summary;
     var eventStartDate = event.startDate.toJSDate();
-    let duration = event.duration.toSeconds() / 60;
+    let duration = event.duration.toSeconds() / 3600;
 
     if (event.sequence) {
       var expand = new ICAL.RecurExpansion({
@@ -60,10 +60,10 @@ function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
 }
 
 function CSVFromObject(object) {
-  let csv = '';
+  let csv = 'Activity, Hours\n';
   for (let key in object) {
     if (object.hasOwnProperty(key)) {
-      csv += `"${key}", ${object[key]}\n`;
+      csv += `"${key}", ${object[key].toFixed(2)}\n`;
     }
   }
 
