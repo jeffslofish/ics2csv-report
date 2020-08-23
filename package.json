@@ -2,12 +2,14 @@
   "name": "calendar-event-duration-accumulator",
   "version": "1.0.0",
   "description": "Parses iCal calendar and generates a CSV file with the total durations from all events with identical names.",
-  "main": "generate.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "serve"
+  },
+  "dependencies": {
+    "serve": "^10.0.1"
   },
   "repository": {
     "type": "git",
