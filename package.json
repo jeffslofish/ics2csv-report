@@ -1,0 +1,22 @@
+{
+  "name": "calendar-event-duration-accumulator",
+  "version": "1.0.0",
+  "description": "Parses iCal calendar and generates a CSV file with the total durations from all events with identical names.",
+  "main": "generate.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffslofish/calendar-event-duration-accumulator.git"
+  },
+  "author": "Jeffrey Fisher",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jeffslofish/calendar-event-duration-accumulator/issues"
+  },
+  "homepage": "https://github.com/jeffslofish/calendar-event-duration-accumulator#readme"
+}
