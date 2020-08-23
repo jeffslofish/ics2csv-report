@@ -1,6 +1,6 @@
 ICAL = require('../vendor/ical.js');
 fs = require('fs');
-generateCumulativeTimeSummary = require('../generateCumulativeTimeSummary.js');
+generate = require('../generate.js');
 assert = require('assert');
 
 function generateFilterStartDate(date) {
@@ -32,7 +32,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-18'),
           generateFilterEndDate('2020-08-18'),
           iCalendarData
@@ -49,7 +49,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-15'),
           generateFilterEndDate('2020-08-17'),
           iCalendarData
@@ -66,7 +66,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-19'),
           generateFilterEndDate('2020-08-25'),
           iCalendarData
@@ -83,7 +83,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-10'),
           generateFilterEndDate('2020-08-25'),
           iCalendarData
@@ -102,7 +102,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-16'),
           generateFilterEndDate('2020-08-19'),
           iCalendarData
@@ -119,7 +119,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-15'),
           generateFilterEndDate('2020-08-19'),
           iCalendarData
@@ -136,7 +136,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-16'),
           generateFilterEndDate('2020-08-16'),
           iCalendarData
@@ -153,7 +153,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-19'),
           generateFilterEndDate('2020-08-19'),
           iCalendarData
@@ -170,7 +170,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-17'),
           generateFilterEndDate('2020-08-17'),
           iCalendarData
@@ -187,7 +187,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-13'),
           generateFilterEndDate('2020-08-14'),
           iCalendarData
@@ -204,7 +204,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-13'),
           generateFilterEndDate('2020-08-21'),
           iCalendarData
@@ -223,7 +223,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-15'),
           generateFilterEndDate('2020-08-22'),
           iCalendarData
@@ -240,7 +240,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-15'),
           generateFilterEndDate('2020-08-17'),
           iCalendarData
@@ -257,7 +257,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-20'),
           generateFilterEndDate('2020-08-22'),
           iCalendarData
@@ -274,7 +274,7 @@ describe('generateCumulativeTimeSummary()', function () {
           return console.log(err);
         }
 
-        let cumulativeDurations = generateCumulativeTimeSummary.generateCumulativeTimeSummary(
+        let cumulativeDurations = generate.generateCumulativeTimeSummary(
           generateFilterStartDate('2020-08-18'),
           generateFilterEndDate('2020-08-19'),
           iCalendarData

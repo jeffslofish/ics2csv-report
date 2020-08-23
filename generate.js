@@ -1,4 +1,4 @@
-function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
+function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
     var jcalData = ICAL.parse(iCalendarData);
     var comp = new ICAL.Component(jcalData);
     var vevents = comp.getAllSubcomponents('vevent');
@@ -77,6 +77,18 @@ function generateCumulativeTimeSummary(filterStartDate, filterEndDate, iCalendar
     return cumulativeDurations;
 }
 
+function CSVFromObject(object) {
+    let csv = '';
+    for (let key in object) {
+        if (object.hasOwnProperty(key)) {
+            csv += `"${key}", ${object[key]}\n`;
+        }
+    }
+
+    download(csv, "time.csv", "text/plain");
+}
+
 if (typeof exports !== 'undefined') {
     exports.generateCumulativeTimeSummary = generateCumulativeTimeSummary;
+    exports.CSVFromObject = CSVFromObject;
 }
