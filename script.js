@@ -8,7 +8,7 @@ function readFileAsString() {
   var reader = new FileReader();
   reader.onload = function (event) {
     var iCalendarData = event.target.result;
-    
+
     var chosenStartDateParts = document
       .getElementById('startDate')
       .value.split('-');
@@ -32,7 +32,11 @@ function readFileAsString() {
     console.log('Chosen start date: ', chosenStartDate);
     console.log('Chosen end date: ', chosenEndDate);
 
-    let cumulativeDurations = cumulativeTimeSummary(chosenStartDate, chosenEndDate, iCalendarData);
+    let cumulativeDurations = cumulativeTimeSummary(
+      chosenStartDate,
+      chosenEndDate,
+      iCalendarData
+    );
     console.log(cumulativeDurations);
 
     CSVFromObject(cumulativeDurations);
