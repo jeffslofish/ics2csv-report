@@ -17,9 +17,8 @@ Which if you import into Excel, will look like this:
 ![calendar excel summary](https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/calendar-summary-excel.png?raw=true)
 
 ## How to use:
-1. Download or clone this repo.
 1. Export your calendar into iCal format (may be .ics extension).
-1. Open index.html.
+1. Goto https://calendar-event-durations.herokuapp.com/.
 1. Choose your desired start and end dates to filter events.
 1. Click `Choose File` and select your exported calendar file.
 1. You will then be promted to download the CSV summary file.
