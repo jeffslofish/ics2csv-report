@@ -8,18 +8,24 @@
 
 <body>
   <h1>Calendar Event Duration Accumulator</h1>
-  <p><a target="_blank" rel="noreferrer noopener" href="https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/README.md#calendar-event-duration-accumulator">Instructions</a></p>
+  <p><a target="_blank" rel="noreferrer noopener"
+      href="https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/README.md#calendar-event-duration-accumulator">Instructions</a>
+  </p>
   <form id="form">
     <fieldset>
       <legend>Filter events only within these dates:</legend>
+      <button type="button" id="filterCurrentMonth">Current Month</button>
+      <button type="button" id="filterCurrentYear">Current Year</button>
+      <br>
+      <br>
       <label for="startDate">Start:</label>
       <input type="date" id="startDate" name="startDate">
       <label for="endDate">End:</label>
       <input type="date" id="endDate" name="endDate">
     </fieldset>
-    
 
-    <label for="upload" >Choose calendar file to convert</label><br>
+
+    <label for="upload">Choose calendar file to convert</label><br>
     <input type="file" id="upload">
     <br>
     <br>

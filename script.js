@@ -1,4 +1,4 @@
-const uploadFileInput = document.getElementById('upload')
+const uploadFileInput = document.getElementById('upload');
 uploadFileInput.addEventListener('change', readFileAsString);
 
 let files;
@@ -15,7 +15,7 @@ function convert() {
   var reader = new FileReader();
   reader.onload = function (event) {
     var iCalendarData = event.target.result;
-    
+
     var chosenStartDateParts = document
       .getElementById('startDate')
       .value.split('-');
@@ -52,8 +52,48 @@ function convert() {
   return false;
 }
 
-function init(){
+function pad(num) {
+  return ('00' + num).slice(-2);
+}
+
+function convertDateToyyyyMMdd(date) {
+  const [month, day, year] = date.toLocaleDateString().split('/');
+  return `${year}-${pad(month)}-${pad(day)}`;
+}
+
+function filterCurrentMonth() {
+  const date = new Date(),
+    y = date.getFullYear(),
+    m = date.getMonth();
+  const firstDayOfMonth = new Date(y, m, 1);
+  const lastDayOfMonth = new Date(y, m + 1, 0);
+
+  document.getElementById('startDate').value = convertDateToyyyyMMdd(
+    firstDayOfMonth
+  );
+  document.getElementById('endDate').value = convertDateToyyyyMMdd(
+    lastDayOfMonth
+  );
+}
+
+function filterCurrentYear() {
+  const date = new Date(),
+    y = date.getFullYear();
+  const firstDayOfYear = new Date(y, 0, 1);
+  const lastDayOfYear = new Date(y, 11, 31);
+
+  document.getElementById('startDate').value = convertDateToyyyyMMdd(
+    firstDayOfYear
+  );
+  document.getElementById('endDate').value = convertDateToyyyyMMdd(
+    lastDayOfYear
+  );
+}
+
+function init() {
   document.getElementById('form').onsubmit = convert;
+  document.getElementById('filterCurrentMonth').onclick = filterCurrentMonth;
+  document.getElementById('filterCurrentYear').onclick = filterCurrentYear;
 }
 
 window.onload = init;
