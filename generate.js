@@ -71,6 +71,6 @@ function CSVFromObject(object) {
 }
 
 if (typeof exports !== 'undefined') {
-  exports.generateCumulativeTimeSummary = generateCumulativeTimeSummary;
+  exports.cumulativeTimeSummary = cumulativeTimeSummary;
   exports.CSVFromObject = CSVFromObject;
 }
