@@ -1,18 +1,21 @@
-let uploadFileInput = document.getElementById('upload')
+const uploadFileInput = document.getElementById('upload')
 uploadFileInput.addEventListener('change', readFileAsString);
 
+let files;
 function readFileAsString() {
-  var files = this.files;
+  files = this.files;
+}
+
+function convert() {
   if (files.length === 0) {
     console.log('No file is selected');
-    return;
+    return false;
   }
 
   var reader = new FileReader();
   reader.onload = function (event) {
     var iCalendarData = event.target.result;
-    uploadFileInput.value = null; // So you can process the same file more than once if desired
-
+    
     var chosenStartDateParts = document
       .getElementById('startDate')
       .value.split('-');
@@ -46,6 +49,11 @@ function readFileAsString() {
     CSVFromObject(cumulativeDurations);
   };
   reader.readAsText(files[0]);
+  return false;
 }
 
+function init(){
+  document.getElementById('form').onsubmit = convert;
+}
 
+window.onload = init;

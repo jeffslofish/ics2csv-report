@@ -9,15 +9,21 @@
 <body>
   <h1>Calendar Event Duration Accumulator</h1>
   <p><a target="_blank" rel="noreferrer noopener" href="https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/README.md#calendar-event-duration-accumulator">Instructions</a></p>
-  <form>
-    <p>Filter events only within these dates:</p>
-    <label for="startDate">Start:</label>
-    <input type="date" id="startDate" name="startDate">
-    <label for="endDate">End:</label>
-    <input type="date" id="endDate" name="endDate">
+  <form id="form">
+    <fieldset>
+      <legend>Filter events only within these dates:</legend>
+      <label for="startDate">Start:</label>
+      <input type="date" id="startDate" name="startDate">
+      <label for="endDate">End:</label>
+      <input type="date" id="endDate" name="endDate">
+    </fieldset>
+    
 
-    <p>Choose calendar file to convert</p>
+    <label for="upload" >Choose calendar file to convert</label><br>
     <input type="file" id="upload">
+    <br>
+    <br>
+    <input type="submit" id="submit" value="Convert!">
   </form>
   <script src="generate.js"></script>
   <script src="script.js"></script>
