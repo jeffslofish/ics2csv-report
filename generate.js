@@ -59,6 +59,47 @@ function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
   return cumulativeDurations;
 }
 
+function CSVFromObjectArray(array) {
+  let csvArr = ['Activity'];
+  for (const item of array) {
+    csvArr.push(`${item[1]} ${item[2]}`);
+  }
+  let csv = csvArr.join(', ') + '\n';
+
+  console.log(csv);
+
+  //get all keys
+  let masterObj = {};
+  for (const item of array) {
+    let object = item[0];
+    for (let key in object) {
+      if (!masterObj.hasOwnProperty(key)) {
+        masterObj[key] = [];
+      }
+    }
+  }
+
+  for (const key in masterObj) {
+    for (const item of array) {
+      let object = item[0];
+      if (object.hasOwnProperty(key)) {
+        masterObj[key].push(object[key]);
+      } else {
+        masterObj[key].push(0);
+      }
+    }
+  }
+
+  let monthTotals = [];
+  for (let key in masterObj) {
+    csv += `"${key}", `;
+    csv += masterObj[key].map(function(val){return val.toFixed(2)}).join(', ');
+    csv += '\n';
+  }
+
+  download(csv, 'time.csv', 'text/plain');
+}
+
 function CSVFromObject(object) {
   let csv = 'Activity, Hours\n';
   for (let key in object) {

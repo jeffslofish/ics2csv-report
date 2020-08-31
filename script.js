@@ -1,3 +1,5 @@
+//const { CSVFromObject } = require("./generate");
+
 const uploadFileInput = document.getElementById('upload');
 uploadFileInput.addEventListener('change', readFileAsString);
 
@@ -39,17 +41,56 @@ function convert() {
     console.log('Chosen start date: ', chosenStartDate);
     console.log('Chosen end date: ', chosenEndDate);
 
-    let cumulativeDurations = cumulativeTimeSummary(
-      chosenStartDate,
-      chosenEndDate,
-      iCalendarData
-    );
-    console.log(cumulativeDurations);
+    let cumulativeDurations = {};
+    const groupBy = document.getElementById('groupby').value;
+    if (groupBy === 'month') {
+      const dates = getStartAndEndDatesForEachMonth(chosenStartDate, chosenEndDate);
+      let cumulativeDurationsArr = [];
+      for (const [start, end] of dates) {
+        //console.log("dates: ", start, end);
+        cumulativeDurationsArr.push([cumulativeTimeSummary(
+          start,
+          end,
+          iCalendarData
+        ), start.getFullYear(), start.getMonth()]);
+      }
 
-    CSVFromObject(cumulativeDurations);
+      CSVFromObjectArray(cumulativeDurationsArr);
+
+
+    } else {
+      cumulativeDurations = cumulativeTimeSummary(
+        chosenStartDate,
+        chosenEndDate,
+        iCalendarData
+      );
+
+      CSVFromObject(cumulativeDurations);
+    }
   };
   reader.readAsText(files[0]);
   return false;
+}
+
+function getStartAndEndDatesForEachMonth(filterStartDate, filterEndDate) {
+  let currentMonth = filterStartDate.getMonth();
+  let currentYear = filterStartDate.getFullYear();
+  let endMonth = filterEndDate.getMonth();
+  let endYear = filterEndDate.getFullYear();
+
+  let dates = [];
+  while ((currentMonth < 12 && currentYear < endYear) || (currentMonth <= endMonth && currentYear === endYear)) {
+    dates.push(getFirstLastDaysOfMonth(new Date(currentYear, currentMonth, 1)));
+
+    if (currentMonth < 11) {
+      currentMonth++;
+    } else {
+      currentMonth = 0; 
+      currentYear++;
+    }
+  }
+
+  return dates;
 }
 
 function pad(num) {
@@ -61,12 +102,17 @@ function convertDateToyyyyMMdd(date) {
   return `${year}-${pad(month)}-${pad(day)}`;
 }
 
-function filterCurrentMonth() {
-  const date = new Date(),
-    y = date.getFullYear(),
+function getFirstLastDaysOfMonth(date) {
+  const y = date.getFullYear(),
     m = date.getMonth();
   const firstDayOfMonth = new Date(y, m, 1);
   const lastDayOfMonth = new Date(y, m + 1, 0);
+
+  return [firstDayOfMonth, lastDayOfMonth];
+}
+
+function filterCurrentMonth() {
+  const [firstDayOfMonth, lastDayOfMonth] = getFirstLastDaysOfMonth(new Date());
 
   document.getElementById('startDate').value = convertDateToyyyyMMdd(
     firstDayOfMonth
