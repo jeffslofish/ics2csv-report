@@ -1,4 +1,4 @@
-ICAL = require('../vendor/ical.js');
+ICAL = require('ical.js');
 fs = require('fs');
 generate = require('../generate.js');
 assert = require('assert');
@@ -27,7 +27,7 @@ function generateFilterEndDate(date) {
 describe('cumulativeTimeSummary()', function () {
   describe('single non-recurring event', function () {
     it('should return object with correct cumulative time when the filter start and end dates are the same as the event date', function (done) {
-      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-000.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -44,7 +44,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative time when the filter is before the event', function (done) {
-      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-000.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -61,7 +61,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative time when the filter after before the event', function (done) {
-      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-000.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -78,7 +78,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative time when the filter is around the event', function (done) {
-      fs.readFile('test-000.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-000.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -97,7 +97,7 @@ describe('cumulativeTimeSummary()', function () {
 
   describe('single recurring event', function () {
     it('should return object with correct cumulative time when the filter start and end dates are the same as the event start and end dates', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -114,7 +114,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative time when the filter start date is before the event start date and the filter end date is the same as the event end date', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -131,7 +131,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering for first day of recurring event', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -148,7 +148,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering for last day of recurring event', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -165,7 +165,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering for middle day of recurring event', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -182,7 +182,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return empty object when filtering outside event window', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -199,7 +199,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering around entire event', function (done) {
-      fs.readFile('test-001.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-001.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -218,7 +218,7 @@ describe('cumulativeTimeSummary()', function () {
 
   describe('multiple non-recurring events with same name', function () {
     it('should return object with correct cumulative when filtering around all the events', function (done) {
-      fs.readFile('test-002.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-002.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -235,7 +235,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering the first event', function (done) {
-      fs.readFile('test-002.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-002.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -252,7 +252,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering the last event', function (done) {
-      fs.readFile('test-002.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-002.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
@@ -269,7 +269,7 @@ describe('cumulativeTimeSummary()', function () {
     });
 
     it('should return object with correct cumulative when filtering for middle events', function (done) {
-      fs.readFile('test-002.ics', 'utf8', function (err, iCalendarData) {
+      fs.readFile('./test/test-002.ics', 'utf8', function (err, iCalendarData) {
         if (err) {
           return console.log(err);
         }
