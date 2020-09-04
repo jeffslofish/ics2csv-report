@@ -36,9 +36,6 @@ function convert() {
       59
     );
 
-    console.log('Chosen start date: ', chosenStartDate);
-    console.log('Chosen end date: ', chosenEndDate);
-
     let cumulativeDurations
     try {
       cumulativeDurations = ics2csv.cumulativeTimeSummary(
@@ -50,8 +47,6 @@ function convert() {
       alert(e);
       return false;
     }
-    
-    console.log(cumulativeDurations);
 
     let csv = ics2csv.CSVFromObject(cumulativeDurations);
     download(csv, 'time.csv', 'text/plain');
