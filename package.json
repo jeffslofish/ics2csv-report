@@ -1,28 +1,27 @@
 {
-  "name": "calendar-event-duration-accumulator",
+  "name": "ics2csv_report",
   "version": "1.0.0",
-  "description": "Parses iCal calendar and generates a CSV file with the total durations from all events with identical names.",
+  "description": "Parses ICS calendar file and generates a CSV summary file with the total durations from all events with identical names.",
   "private": true,
   "scripts": {
-    "start": "serve",
-    "test": "mocha",
     "build": "npm run build-web && npm run build-node",
     "build-web": "webpack --config webpack.web.js",
-    "build-node": "webpack --config webpack.node.js"
+    "build-node": "webpack --config webpack.node.js",
+    "test": "mocha"
   },
   "dependencies": {
     "ical.js": "^1.4.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeffslofish/calendar-event-duration-accumulator.git"
+    "url": "git+https://github.com/jeffslofish/ics2csv_report.git"
   },
   "author": "Jeffrey Fisher",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jeffslofish/calendar-event-duration-accumulator/issues"
+    "url": "https://github.com/jeffslofish/ics2csv_report/issues"
   },
-  "homepage": "https://github.com/jeffslofish/calendar-event-duration-accumulator#readme",
+  "homepage": "https://github.com/jeffslofish/ics2csv_report#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "mocha": "^8.1.3",

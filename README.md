@@ -1,5 +1,5 @@
-# calendar-event-duration-accumulator
-Parses iCal calendar and generates a CSV file with the total durations from all events with identical names (uses the iCal "summary" field).
+# ics2csv_report
+Parses ICS calendar file and generates a CSV summary file with the total durations from all events with identical names for the Summary field.
 
 Handles single and recurring events.
 
