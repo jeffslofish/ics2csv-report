@@ -9,9 +9,6 @@ export function cumulativeTimeSummary(
   var comp = new ICAL.Component(jcalData);
   var vevents = comp.getAllSubcomponents('vevent');
 
-  console.log(filterStartDate);
-  console.log(typeof filterStartDate);
-
   if (typeof filterStartDate !== 'object' || filterStartDate.toString() === 'Invalid Date') {
     throw 'filterStartDate is not of type "Date"';
   }
