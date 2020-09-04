@@ -7,8 +7,8 @@ function readFileAsString() {
 }
 
 function convert() {
-  if (files.length === 0) {
-    console.log('No file is selected');
+  if (!files || files.length === 0) {
+    alert('No file is selected');
     return false;
   }
 
@@ -39,11 +39,18 @@ function convert() {
     console.log('Chosen start date: ', chosenStartDate);
     console.log('Chosen end date: ', chosenEndDate);
 
-    let cumulativeDurations = ics2csv.cumulativeTimeSummary(
-      chosenStartDate,
-      chosenEndDate,
-      iCalendarData
-    );
+    let cumulativeDurations
+    try {
+      cumulativeDurations = ics2csv.cumulativeTimeSummary(
+        chosenStartDate,
+        chosenEndDate,
+        iCalendarData
+      );
+    } catch(e) {
+      alert(e);
+      return false;
+    }
+    
     console.log(cumulativeDurations);
 
     let csv = ics2csv.CSVFromObject(cumulativeDurations);

@@ -1,10 +1,26 @@
 import ICAL from 'ical.js';
 
-export function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
+export function cumulativeTimeSummary(
+  filterStartDate,
+  filterEndDate,
+  iCalendarData
+) {
   var jcalData = ICAL.parse(iCalendarData);
   var comp = new ICAL.Component(jcalData);
   var vevents = comp.getAllSubcomponents('vevent');
 
+  console.log(filterStartDate);
+  console.log(typeof filterStartDate);
+
+  if (typeof filterStartDate !== 'object' || filterStartDate.toString() === 'Invalid Date') {
+    throw 'filterStartDate is not of type "Date"';
+  }
+  if (typeof filterEndDate !== 'object' || filterEndDate.toString() === 'Invalid Date') {
+    throw 'filterEndDate is not of type "Date"';
+  }
+  if (filterStartDate > filterEndDate) {
+    throw 'filterStartDate is after filterEndDate';
+  }
   let cumulativeDurations = {};
 
   vevents.forEach((vevent) => {
@@ -26,8 +42,7 @@ export function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarD
         eventStartDate = next.toJSDate();
 
         if (i++ > max) {
-          console.error('too many dates');
-          break;
+          throw 'Too many dates';
         }
         if (eventStartDate < filterStartDate) {
           continue;
