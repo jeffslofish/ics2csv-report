@@ -39,14 +39,15 @@ function convert() {
     console.log('Chosen start date: ', chosenStartDate);
     console.log('Chosen end date: ', chosenEndDate);
 
-    let cumulativeDurations = cumulativeTimeSummary(
+    let cumulativeDurations = ics2csv.cumulativeTimeSummary(
       chosenStartDate,
       chosenEndDate,
       iCalendarData
     );
     console.log(cumulativeDurations);
 
-    CSVFromObject(cumulativeDurations);
+    let csv = ics2csv.CSVFromObject(cumulativeDurations);
+    download(csv, 'time.csv', 'text/plain');
   };
   reader.readAsText(files[0]);
   return false;

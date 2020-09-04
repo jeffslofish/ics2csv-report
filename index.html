@@ -2,18 +2,18 @@
 <html>
 
 <head>
-  <script src="https://unpkg.com/ical.js@1.4.0/build/ical.js"></script>
+  <title>ics2csv converter</title>
   <script src="vendor/download.js"></script>
 </head>
 
 <body>
-  <h1>Calendar Event Duration Accumulator</h1>
+  <h1>ics2csv converter</h1>
   <p><a target="_blank" rel="noreferrer noopener"
       href="https://github.com/jeffslofish/calendar-event-duration-accumulator/blob/master/README.md#calendar-event-duration-accumulator">Instructions</a>
   </p>
   <form id="form">
     <fieldset>
-      <legend>Filter events only within these dates:</legend>
+      <legend>Convert events only within these dates:</legend>
       <button type="button" id="filterCurrentMonth">Current Month</button>
       <button type="button" id="filterCurrentYear">Current Year</button>
       <br>
@@ -25,13 +25,13 @@
     </fieldset>
 
 
-    <label for="upload">Choose calendar file to convert</label><br>
+    <label for="upload">Choose calendar (.ics) file to convert</label><br>
     <input type="file" id="upload">
     <br>
     <br>
     <input type="submit" id="submit" value="Convert!">
   </form>
-  <script src="generate.js"></script>
+  <script src="./dist-web/ics2csv.js"></script>
   <script src="script.js"></script>
 </body>
 

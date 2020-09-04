@@ -1,4 +1,6 @@
-function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
+import ICAL from 'ical.js';
+
+export function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
   var jcalData = ICAL.parse(iCalendarData);
   var comp = new ICAL.Component(jcalData);
   var vevents = comp.getAllSubcomponents('vevent');
@@ -59,7 +61,7 @@ function cumulativeTimeSummary(filterStartDate, filterEndDate, iCalendarData) {
   return cumulativeDurations;
 }
 
-function CSVFromObject(object) {
+export function CSVFromObject(object) {
   let csv = 'Activity, Hours\n';
   for (let key in object) {
     if (object.hasOwnProperty(key)) {
@@ -67,10 +69,5 @@ function CSVFromObject(object) {
     }
   }
 
-  download(csv, 'time.csv', 'text/plain');
-}
-
-if (typeof exports !== 'undefined') {
-  exports.cumulativeTimeSummary = cumulativeTimeSummary;
-  exports.CSVFromObject = CSVFromObject;
+  return csv;
 }
