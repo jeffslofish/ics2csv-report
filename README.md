@@ -18,7 +18,7 @@ Which if you import into Excel, will look like this:
 
 ## How to use:
 1. Export your calendar into ICS format (from your calendar program).
-2. Goto https://calendar-event-durations.herokuapp.com/.
+2. Goto https://ics2csv-report.netlify.app.
 3. Choose your desired start and end dates to filter events.
 4. Click `Choose File` and select your exported ICS calendar file.
 5. You will then be promted to download the CSV summary file.
