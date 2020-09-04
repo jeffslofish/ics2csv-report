@@ -1,4 +1,6 @@
 # ics2csv-report
+[![Netlify Status](https://api.netlify.com/api/v1/badges/32193b07-660d-4510-8499-db1b5d35f084/deploy-status)](https://app.netlify.com/sites/ics2csv-report/deploys)
+
 Parses ICS calendar file and generates a CSV summary file with the total durations from all events with identical names for the Summary field.
 
 Handles single and recurring events.
