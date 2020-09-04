@@ -24,9 +24,16 @@ Which if you import into Excel, will look like this:
 5. You will then be promted to download the CSV summary file.
 6. Import the CSV file into Excel or Google Sheets if desired
 
+## Development instructions
+
+### To build from source
+````
+npm run build
+````
+You can use /dist-web/ics2csv.js for inclusion in HTML files.
+You can use /dist/ics2csv.js for Node projects.
+
 ## To run unit tests:
 ````
-cd test
-npm install
-npm test
+npm run test
 ````
