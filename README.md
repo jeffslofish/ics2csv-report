@@ -1,4 +1,4 @@
-# ics2csv_report
+# ics2csv-report
 Parses ICS calendar file and generates a CSV summary file with the total durations from all events with identical names for the Summary field.
 
 Handles single and recurring events.
