@@ -5,8 +5,15 @@
   "private": true,
   "scripts": {
     "build": "npm run build-web && npm run build-node",
-    "build-web": "webpack --config webpack.web.js",
-    "build-node": "webpack --config webpack.node.js",
+    "build-dev": "npm run build-web-dev && npm run build-node-dev",
+    "build-web": "npm run build-web-prod-index && npm run build-web-prod-script", 
+    "build-web-dev": "npm run build-web-dev-index && npm run build-web-dev-script", 
+    "build-web-dev-index": "webpack --config webpack.web.index.js --mode=\"development\" --devtool=\"inline-source-map\"",
+    "build-web-dev-script": "webpack --config webpack.web.script.js --mode=\"development\" --devtool=\"inline-source-map\"",
+    "build-web-prod-index": "webpack --config webpack.web.index.js --mode=\"production\"",
+    "build-web-prod-script": "webpack --config webpack.web.script.js --mode=\"production\"",
+    "build-node": "webpack --config webpack.node.js --mode=\"production\"",
+    "build-node-dev": "webpack --config webpack.node.js --mode=\"development\" --devtool=\"inline-source-map\"",
     "test": "mocha"
   },
   "dependencies": {
@@ -26,6 +33,8 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.1.0",
     "mocha": "^8.1.3",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }

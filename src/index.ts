@@ -1,24 +1,32 @@
 import ICAL from 'ical.js';
 
+type NumberDictionary = { [index: string]: number };
+
 export function cumulativeTimeSummary(
-  filterStartDate,
-  filterEndDate,
-  iCalendarData
+  filterStartDate: Date,
+  filterEndDate: Date,
+  iCalendarData: string
 ) {
   var jcalData = ICAL.parse(iCalendarData);
   var comp = new ICAL.Component(jcalData);
   var vevents = comp.getAllSubcomponents('vevent');
 
-  if (typeof filterStartDate !== 'object' || filterStartDate.toString() === 'Invalid Date') {
+  if (
+    typeof filterStartDate !== 'object' ||
+    filterStartDate.toString() === 'Invalid Date'
+  ) {
     throw 'filterStartDate is not of type "Date"';
   }
-  if (typeof filterEndDate !== 'object' || filterEndDate.toString() === 'Invalid Date') {
+  if (
+    typeof filterEndDate !== 'object' ||
+    filterEndDate.toString() === 'Invalid Date'
+  ) {
     throw 'filterEndDate is not of type "Date"';
   }
   if (filterStartDate > filterEndDate) {
     throw 'filterStartDate is after filterEndDate';
   }
-  let cumulativeDurations = {};
+  let cumulativeDurations: NumberDictionary = {};
 
   vevents.forEach((vevent) => {
     var event = new ICAL.Event(vevent);
@@ -48,7 +56,7 @@ export function cumulativeTimeSummary(
           break;
         }
 
-        if (cumulativeDurations.hasOwnProperty(summary)) {
+        if (summary in cumulativeDurations) {
           cumulativeDurations[summary] += duration;
         } else {
           cumulativeDurations[summary] = duration;
@@ -73,7 +81,7 @@ export function cumulativeTimeSummary(
   return cumulativeDurations;
 }
 
-export function CSVFromObject(object) {
+export function CSVFromObject(object: NumberDictionary) {
   let csv = 'Activity, Hours\n';
   for (let key in object) {
     if (object.hasOwnProperty(key)) {

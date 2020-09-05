@@ -15,9 +15,8 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
+    path: path.resolve(__dirname, 'dist-web'),
     filename: 'ics2csv.js',
-    path: path.resolve(__dirname, 'dist'),
-    library: 'ics2csv',
-    libraryTarget: 'commonjs2',
-  },
+    library: 'ics2csv'
+  }
 };

@@ -1,4 +1,3 @@
-const ICAL = require('ical.js');
 const fs = require('fs');
 const ics2csv = require('../dist/ics2csv.js');
 const assert = require('assert');

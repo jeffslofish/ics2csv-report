@@ -1,7 +1,10 @@
+declare var ics2csv: any;
+declare var download: any;
+
 const uploadFileInput = document.getElementById('upload');
 uploadFileInput.addEventListener('change', readFileAsString);
 
-let files;
+let files: Array<Blob>;
 function readFileAsString() {
   files = this.files;
 }
@@ -16,34 +19,34 @@ function convert() {
   reader.onload = function (event) {
     var iCalendarData = event.target.result;
 
-    var chosenStartDateParts = document
-      .getElementById('startDate')
-      .value.split('-');
+    var chosenStartDateParts = (document.getElementById(
+      'startDate'
+    ) as HTMLInputElement).value.split('-');
     var chosenStartDate = new Date(
-      chosenStartDateParts[0],
-      chosenStartDateParts[1] - 1,
-      chosenStartDateParts[2]
+      parseInt(chosenStartDateParts[0]),
+      parseInt(chosenStartDateParts[1]) - 1,
+      parseInt(chosenStartDateParts[2])
     );
-    var chosenEndDateParts = document
-      .getElementById('endDate')
-      .value.split('-');
+    var chosenEndDateParts = (document.getElementById(
+      'endDate'
+    ) as HTMLInputElement).value.split('-');
     var chosenEndDate = new Date(
-      chosenEndDateParts[0],
-      chosenEndDateParts[1] - 1,
-      chosenEndDateParts[2],
+      parseInt(chosenEndDateParts[0]),
+      parseInt(chosenEndDateParts[1]) - 1,
+      parseInt(chosenEndDateParts[2]),
       23,
       59,
       59
     );
 
-    let cumulativeDurations
+    let cumulativeDurations;
     try {
       cumulativeDurations = ics2csv.cumulativeTimeSummary(
         chosenStartDate,
         chosenEndDate,
         iCalendarData
       );
-    } catch(e) {
+    } catch (e) {
       alert(e);
       return false;
     }
@@ -55,11 +58,11 @@ function convert() {
   return false;
 }
 
-function pad(num) {
+function pad(num: string) {
   return ('00' + num).slice(-2);
 }
 
-function convertDateToyyyyMMdd(date) {
+function convertDateToyyyyMMdd(date: Date) {
   const [month, day, year] = date.toLocaleDateString().split('/');
   return `${year}-${pad(month)}-${pad(day)}`;
 }
@@ -71,12 +74,12 @@ function filterCurrentMonth() {
   const firstDayOfMonth = new Date(y, m, 1);
   const lastDayOfMonth = new Date(y, m + 1, 0);
 
-  document.getElementById('startDate').value = convertDateToyyyyMMdd(
-    firstDayOfMonth
-  );
-  document.getElementById('endDate').value = convertDateToyyyyMMdd(
-    lastDayOfMonth
-  );
+  (document.getElementById(
+    'startDate'
+  ) as HTMLInputElement).value = convertDateToyyyyMMdd(firstDayOfMonth);
+  (document.getElementById(
+    'endDate'
+  ) as HTMLInputElement).value = convertDateToyyyyMMdd(lastDayOfMonth);
 }
 
 function filterCurrentYear() {
@@ -85,12 +88,12 @@ function filterCurrentYear() {
   const firstDayOfYear = new Date(y, 0, 1);
   const lastDayOfYear = new Date(y, 11, 31);
 
-  document.getElementById('startDate').value = convertDateToyyyyMMdd(
-    firstDayOfYear
-  );
-  document.getElementById('endDate').value = convertDateToyyyyMMdd(
-    lastDayOfYear
-  );
+  (document.getElementById(
+    'startDate'
+  ) as HTMLInputElement).value = convertDateToyyyyMMdd(firstDayOfYear);
+  (document.getElementById(
+    'endDate'
+  ) as HTMLInputElement).value = convertDateToyyyyMMdd(lastDayOfYear);
 }
 
 function init() {
