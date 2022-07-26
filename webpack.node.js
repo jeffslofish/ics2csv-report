@@ -1,23 +1,22 @@
-const path = require('path');
+const path = require("path")
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: "./src/index.ts",
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: [".ts", ".js"],
   },
   output: {
-    filename: 'ics2csv.js',
-    path: path.resolve(__dirname, 'dist'),
-    library: 'ics2csv',
-    libraryTarget: 'commonjs2',
+    filename: "ics2csv.js",
+    path: path.resolve(__dirname, "dist"),
+    libraryTarget: "commonjs2",
   },
-};
+}

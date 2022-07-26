@@ -1,27 +1,27 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require("path")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
-  entry: './src/web/script.ts',
+  entry: "./src/web/script.ts",
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [{ from: 'static' }],
+      patterns: [{ from: "static" }],
     }),
   ],
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: [".ts", ".js"],
   },
   output: {
-    path: path.resolve(__dirname, 'dist-web'),
-    filename: 'script.js'
-  }
-};
+    path: path.resolve(__dirname, "dist-web"),
+    filename: "script.js",
+  },
+}
